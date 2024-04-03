@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Калькулятор</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        button {
+            font-size: 30px;
+            height: 75px;
+        }
+        
+        h1{
+            font-size: 50px;
+            padding-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="main-text"></h1>
+    <h1 id="result-text">0</h1>
+    <div class="d-flex justify-content-between">
+        <div>
+            <button class="btn btn-light text-danger w-100" onclick="c();">c</button>
+            <button class="btn btn-light text-danger w-100" onclick="plus('7');">7</button>
+            <button class="btn btn-light text-danger w-100" onclick="plus('4');">4</button>
+            <button class="btn btn-light text-danger w-100" onclick="plus('1');">1</button>
+            <button class="btn btn-light text-danger w-100" id="reverse">+/-</button>
+        </div>
+        <div>
+            <button class="btn btn-light text-danger w-100" onclick="remove()"><-</button>
+            <button class="btn btn-light text-danger w-100" onclick="plus('8');">8</button>
+            <button class="btn btn-light text-danger w-100" onclick="plus('5');">5</button>
+            <button class="btn btn-light text-danger w-100" onclick="plus('2');">2</button>
+            <button class="btn btn-light text-danger w-100" onclick="plus('0');">0</button>
+        </div>
+        <div>
+            <button class="btn btn-light text-danger w-100" onclick="action('%');">%</button>
+            <button class="btn btn-light text-danger w-100" onclick="plus('9');">9</button>
+            <button class="btn btn-light text-danger w-100" onclick="plus('6');">6</button>
+            <button class="btn btn-light text-danger w-100" onclick="plus('3');">3</button>
+            <button class="btn btn-light text-danger w-100" onclick="action('.');">.</button>
+        </div>
+        <div>
+            <button class="btn btn-light text-danger w-100" onclick="action('÷');">÷</button>
+            <button class="btn btn-light text-danger w-100" onclick="action('*');">*</button>
+            <button class="btn btn-light text-danger w-100" onclick="action('-');">-</button>
+            <button class="btn btn-light text-danger w-100" onclick="action('+');">+</button>
+            <button class="btn btn-dark text-danger w-100" onclick="res()">=</button>
+        </div>
+    </div>
+    <script>
+        var stroke = document.getElementById("main-text");
+        var res_stroke = document.getElementById("result-text");
+        var actione = [0, ""];
+        var num1;
+        var num2;
+        
+        function plus(num){
+            if (actione[0] == 0) {
+                res_stroke.innerText = "";
+                stroke.innerText = stroke.innerText + num;
+            } 
+            else if (actione[0] == 2){
+                stroke.innerText = stroke.innerText + num;
+            }
+            else if (actione[0] == 1){
+                num1 = stroke.innerText;
+                stroke.innerText = "";
+                stroke.innerText += num;
+                actione[0] = 2;
+            }
+       } 
+        
+        function action(check) {
+            console.log("some")
+            if (actione[0] == 0){
+                actione[1] = check;
+                actione[0] = 1;
+            }
+        }
+        
+        function c(){
+            stroke.innerText = "";
+            res_stroke.innerText = "0"
+            actione[0] = 0;
+            actione[1] = "";
+        }
+        
+        function remove() {
+            stroke.innerText = stroke.innerText.slice(0, -1);
+        }
+        
+        function res () {
+            if (actione[1] == "+"){
+                num2 = stroke.innerText;
+                number1 = Number(num1)
+                number2 = Number(num2)
+                result = number1 + number2;
+                stroke.innerText = "";
+                res_stroke.innerText = result;
+                actione[0] = 0;
+                actione[1] = "";
+            }
+            if (actione[1] == "-"){
+                num2 = stroke.innerText;
+                number1 = Number(num1)
+                number2 = Number(num2)
+                result = number1 - number2;
+                stroke.innerText = "";
+                res_stroke.innerText = result;
+                actione[0] = 0;
+                actione[1] = "";
+            }
+            if (actione[1] == "*"){
+                num2 = stroke.innerText;
+                number1 = Number(num1)
+                number2 = Number(num2)
+                result = number1 * number2;
+                stroke.innerText = "";
+                res_stroke.innerText = result;
+                actione[0] = 0;
+                actione[1] = "";
+            }
+            if (actione[1] == "÷"){
+                num2 = stroke.innerText;
+                number1 = Number(num1)
+                number2 = Number(num2)
+                result = number1 / number2;
+                stroke.innerText = "";
+                res_stroke.innerText = result;
+                actione[0] = 0;
+                actione[1] = "";
+            }
+        }
+    </script>
+</body>
+</html>
